@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'entreprise{% endblock %}
+
+{% block body %}
+    <h1>Détails de l'entreprise</h1>
+
+    <h2>{{ entreprise }}</h2><br>
+    <p>Adresse : {{ entreprise.getAdresseComplete() }}</p><br>
+    {#afin de pouvoir afficher la date au format jj/mm/aaaa on utilise le filtre "date()" afin de ressortir notre getDateCreation en chaîne de caractères 
+    et on le transforme en format 'd/m/Y', on peut aussi modifier l'affichage selon le besoin, si l'on préfère les "." ou les "/"#}
+    <p>Date de création : {{ entreprise.getDateCreation() | date('d.m.Y') }}</p><br>
+
+    <h3>Liste des employés</h3>
+    {% if entreprise.employes | length > 0 %}
+        <table>
+            <thead> 
+                <tr>
+                    <th>Employé</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for employe in entreprise.employes %}
+                <tr><td><a href="{{ path('show_employe',{'id':employe.id}) }}">{{employe}}</a><br></td></tr>  
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+            <p>Il n'y a aucun employé dans cette entreprise</p>
+    {% endif %}
+{% endblock %}

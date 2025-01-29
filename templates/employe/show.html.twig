@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'employé{% endblock %}
+
+{% block body %}
+    <h1>Détails de l'employé</h1>
+
+    <h2>{{ employe }}</h2>
+    <p>Ville : {% if employe.ville %}
+                    <p>{{ employe.getVille() }}</p>
+                {% else %}
+                    <p>Ville non renseignée</p>
+                {% endif %}
+    <p>Nom : {{ employe.getNom() }}</p>
+    <a href="{{path('show_entreprise',{'id':employe.entreprise.id})}}"><p>Entreprise : {{ employe.entreprise.raisonSociale }}</p></a>
+    {#afin de pouvoir afficher la date au format jj/mm/aaaa on utilise le filtre "date()" afin de ressortir notre getDateCreation en chaîne de caractères 
+    et on le transforme en format 'd/m/Y', on peut aussi modifier l'affichage selon le besoin, si l'on préfère les "." ou les "/"#}
+    <p>Date de naissance : {{ employe.getDateNaissance() | date('d.m.Y') }}</p>
+    <p>Age : {{ employe.getAge() }}</p>
+    <p>Date d'embauche : {{ employe.getDateEmbauche() | date('d.m.Y') }}</p>
+{% endblock %}
