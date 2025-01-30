@@ -6,6 +6,8 @@
     <h1>Liste des employes</h1>
 
     {% for employe in employes %}
-        <a href="{{path('show_employe',{'id':employe.id})}}"><p>{{ employe }}{{" "}}({{ employe.entreprise.raisonSociale }})</p></a><br>
+        <a href="{{path('show_employe',{'id':employe.id})}}"><p>{{ employe }}{{" "}}({{ employe.entreprise.raisonSociale }})</p></a>
+        <a class="btn btn-warning" href="{{path('edit_employe',{'id':employe.id})}}">Edit</a><br>
+        <a class="btn btn-danger" href="{{path('delete_employe',{'id':employe.id})}}">Supprimer</a>
     {% endfor %}
 {% endblock %}
